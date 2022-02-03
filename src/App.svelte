@@ -111,11 +111,6 @@
 		height: 100%;
 		min-width: 30px;
 		overflow: hidden;
-
-		button {
-			width: 100px;
-			text-align: left;
-		}
 	}
 
 	#dividerX {
