@@ -28,6 +28,8 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^1.0.0-beta.8",
-    "sirv-cli": "^2.0.0"
+    "sass": "^1.49.7",
+    "sirv-cli": "^2.0.0",
+    "uikit": "^3.10.1"
   }
 }
