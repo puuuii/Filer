@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import UIkit from 'uikit'
 	import Icons from 'uikit/dist/js/uikit-icons'
 	import 'uikit/dist/css/uikit.css'
@@ -10,6 +11,7 @@
 
 	/* タブ関係処理 */
 	let tabs = ['tab1', 'Tab2', 'tab3'];
+	let paincontents = ['cont1', 'Cont2', 'cont3'];
   const closeTab = (i) => {
 		tabs.splice(i, 1);
 		tabs = tabs;
@@ -17,8 +19,25 @@
 
 	const addTab = () => {
 		tabs = [...tabs, `tab${tabs.length+1}`];
-		invoke('my_custom_command').then((msg) => console.log(msg))
+		paincontents = [...paincontents, `cont${paincontents.length+1}`];
+		// invoke('my_custom_command').then((msg) => console.log(msg))
 	};
+
+	onMount(async () => {
+		UIkit.util.on("#tab-ul", "moved", (e) => {
+			const to = [...e.srcElement.childNodes].map(item=>item.id).indexOf(e.detail[1].id);
+			const from = e.detail[0].origin['index'];
+			if (to >= paincontents.length) {
+        var k = to - paincontents.length + 1;
+        while (k--) { paincontents.push(undefined) }
+			}
+			paincontents.splice(to, 0, paincontents.splice(from, 1)[0]);
+			paincontents = paincontents;
+			console.log(paincontents)
+
+			UIkit.switcher("#main-pain").show(2);
+		});
+	});
 
 	/* サイド幅可変処理 */
 	let w_dividerX = 1;
@@ -71,10 +90,10 @@
 
 	<div id="tabmain">
 		<section id="tab">
-			<ul uk-tab="connect: #main-pain" uk-sortable="handle: .sortable-handle">
+			<ul id="tab-ul" uk-tab="connect: #main-pain" uk-sortable="handle: .sortable-handle">
 				{#each tabs as tab, i}
 				<!-- svelte-ignore a11y-invalid-attribute -->
-				<li>
+				<li id="{i.toString(10)}">
 					<a href="#">
 						<span class="sortable-handle uk-margin-small-right uk-text-center" uk-icon="icon: table"></span>
 						{tab}
@@ -86,11 +105,11 @@
 
 			<button uk-icon="plus" on:mousedown="{addTab}"></button>
 		</section>
-	
+
 		<section id="main">
 			<ul id="main-pain" class="uk-switcher uk-margin">
-				{#each tabs as tab, i}
-					<li>{tab}</li>
+				{#each paincontents as cont, i}
+					<li>{cont}</li>
 				{/each}
 			</ul>
 		</section>
