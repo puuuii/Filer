@@ -42,6 +42,7 @@ checksum = "94a45b455c14666b85fc40a019e8ab9eb75e3a124e05494f5397122bc9eb06e0"
 name = "app"
 version = "0.1.0"
 dependencies = [
+ "glob",
  "serde",
  "serde_json",
  "tauri",
@@ -1165,6 +1166,12 @@ dependencies = [
  "libc",
  "system-deps 3.2.0",
 ]
+
+[[package]]
+name = "glob"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9b919933a397b79c37e33b77bb2aa3dc8eb6e165ad809e58ff75bc7db2e34574"
 
 [[package]]
 name = "globset"
