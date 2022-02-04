@@ -10,6 +10,9 @@
 
 
 	/* タブ関係処理 */
+	let tabs_ = ['C:/'];
+	let paincontents_ = [];
+	invoke('get_content_from_path', {dir: tabs_[0]}).then((msg) => paincontents_.push(msg));
 	let tabs = ['tab1', 'Tab2', 'tab3'];
 	let paincontents = ['cont1', 'Cont2', 'cont3'];
   const closeTab = (i) => {
@@ -20,7 +23,6 @@
 	const addTab = () => {
 		tabs = [...tabs, `tab${tabs.length+1}`];
 		paincontents = [...paincontents, `cont${paincontents.length+1}`];
-		// invoke('my_custom_command').then((msg) => console.log(msg))
 	};
 
 	onMount(async () => {
@@ -33,7 +35,7 @@
 			}
 			paincontents.splice(to, 0, paincontents.splice(from, 1)[0]);
 			paincontents = paincontents;
-			console.log(paincontents)
+			console.log(paincontents_)
 
 			UIkit.switcher("#main-pain").show(2);
 		});
